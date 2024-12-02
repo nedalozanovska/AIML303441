@@ -219,6 +219,8 @@ States like `TX, CA, and VA` have the highest counts.
 A significant imbalance exists across states.
 
 *Visualization:*
+![image](https://github.com/user-attachments/assets/0f8ac6d5-af31-44a6-82a7-019961afc1e2)
+
 2. Happiness Metric:
 The column is heavily skewed towards Monthly.
 Weekly has only 2 occurrences, making this column unfit for analysis.
