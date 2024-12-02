@@ -145,3 +145,23 @@ Next, there are notable levels of missing data in several columns:
 Addressing these missing values is crucial to ensure the integrity of the analysis and modeling steps.
 
 
+**4. Dropping Columns with Too Much Missing Data**
+
+- **Objective**: Determine which columns to drop due to excessive missing values.
+- **Steps**:
+  1. Calculate the percentage of missing values for each column.
+  2. Apply a threshold: Columns with more than 50% missing values are dropped.
+
+**Code**:
+```python
+missing_percentage = (data_cleaned.isnull().sum() / len(data_cleaned)) * 100
+print("\nPercentage of Missing Values per Column:")
+print(missing_percentage)
+```
+
+- Dropping columns with more than 50% missing values:
+```python
+data_cleaned = data_cleaned.drop(columns=['fauna_friendly'])
+data_cleaned.to_csv("cleaned_euphoria.csv", index=False)
+```
+
