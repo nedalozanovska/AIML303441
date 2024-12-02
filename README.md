@@ -166,7 +166,19 @@ data_cleaned.to_csv("cleaned_euphoria.csv", index=False)
 ```
 **5.Histogram for numerical features**
 
--We create histograms for all numerical columns in the dataset to visualize the distribution of each feature, to help us identify patterns such as skewness, normality, or outliers. This highlights the range of values for each numerical feature.
+-We create histograms for all numerical columns in the dataset to visualize the distribution of each feature, to help us identify patterns such as skewness, normality, or outliers. 
+
+**The code:**
+```python
+numerical_data_cleaned = data_cleaned.select_dtypes(include=['float64', 'int64'])
+numerical_data_cleaned.hist(bins=20, figsize=(15, 10), edgecolor='black')
+plt.suptitle("Histograms for Numerical Features", fontsize=16)
+plt.show()
+```
+
+
+This highlights the range of values for each numerical feature.
 ![image](https://github.com/user-attachments/assets/59cfc1df-50eb-4814-abf8-d579c2007c49)
+
 
 
