@@ -164,4 +164,7 @@ print(missing_percentage)
 data_cleaned = data_cleaned.drop(columns=['fauna_friendly'])
 data_cleaned.to_csv("cleaned_euphoria.csv", index=False)
 ```
+5.Histogram for numerical features
+
+-We create histograms for all numerical columns in the dataset to visualize the distribution of each feature, to help us identify patterns such as skewness, normality, or outliers. This highlights the range of values for each numerical feature.
 
