@@ -102,7 +102,7 @@ cleaned_file_path = "cleaned_euphoria.csv"
 df_cleaned.to_csv(cleaned_file_path, index=False)
 print(f"Columns dropped: {columns_to_drop}")
 ```
-Output:
+**Output:**
 
 Columns dropped: ['creation_time', 'entry_fee', 'nearest_city', 'trade_goods']
 
@@ -133,4 +133,5 @@ plt.show()
 **Graphical Representation:**
 
 The graphical visualization below highlights missing data for each feature:
-<!--  -->
+![image](https://github.com/user-attachments/assets/b7aa3fe4-bf2e-4b05-89ea-b454b1002b2f)
+
