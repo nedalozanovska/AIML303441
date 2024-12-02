@@ -135,3 +135,13 @@ plt.show()
 The graphical visualization below highlights missing data for each feature:
 ![image](https://github.com/user-attachments/assets/b7aa3fe4-bf2e-4b05-89ea-b454b1002b2f)
 
+Next, there are notable levels of missing data in several columns:
+
+- `Referral_friends, Water_sources, and Shelters`: These columns have missing data, which should be addressed during data cleaning even though their level of missing data is not severe.
+- `Region and Happiness_metric`: These columns also have missing data, but the amount is relatively moderate.
+- `Happiness_index and Loyalty_score`: While these columns exhibit missing data, the percentage is low enough to use imputation strategies without significant risk of data distortion.
+- `Fauna_friendly`: This column has a high percentage of missing values and requires specific handling.
+
+Addressing these missing values is crucial to ensure the integrity of the analysis and modeling steps.
+
+
