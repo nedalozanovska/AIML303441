@@ -213,49 +213,23 @@ for col in categorical_features:
 ```
 
 **Output Summary:**
-1. Region
-Value Counts:
-yaml
-Copy code
-TX    10131
-CA     9284
-VA     7411
-NC     5721
-...
-WV       11
-DE        6
-Name: count, dtype: int64
-Analysis:
-States like TX, CA, and VA have the highest counts.
+
+*Analysis:*
+States like `TX, CA, and VA` have the highest counts.
 A significant imbalance exists across states.
-Visualization:
-2. Happiness Metric
-Value Counts:
-yaml
-Copy code
-happiness_metric
-Monthly    89564
-Weekly         2
-Name: count, dtype: int64
-Analysis:
+
+*Visualization:*
+2. Happiness Metric:
 The column is heavily skewed towards Monthly.
 Weekly has only 2 occurrences, making this column unfit for analysis.
-Visualization:
+
+*Visualization:*
 3. Features
-Value Counts (Top Examples):
-yaml
-Copy code
-Parking            5605
-Parking,Storage    1892
-Gym,Pool           1685
-Pool               1333
-Gym,Parking,Pool   1057
-...
 Analysis:
-High variability in combinations, e.g., Parking, Gym,Pool.
+High variability in combinations, e.g., `Parking, Gym,Pool`.
 Further aggregation or preprocessing is required.
 Key Findings:
-The happiness_metric column shows significant skew and low utility for analysis.
+The `happiness_metric` column shows significant skew and low utility for analysis.
 The features column has high variability, requiring preprocessing or aggregation.
 Imbalances in categorical distributions, especially in region, need consideration in modeling.
 
