@@ -175,7 +175,12 @@ numerical_data_cleaned.hist(bins=20, figsize=(15, 10), edgecolor='black')
 plt.suptitle("Histograms for Numerical Features", fontsize=16)
 plt.show()
 ```
+Loyalty score and average time in euphoria does not provide us with any relevant information in this dataset so we can remove them.
 
+```python
+data_cleaned = data_cleaned.drop(columns=['loyalty_score', 'avg_time_in_euphoria'])
+data_cleaned.to_csv("cleaned_euphoria.csv", index=False)
+```
 
 This highlights the range of values for each numerical feature.
 ![image](https://github.com/user-attachments/assets/59cfc1df-50eb-4814-abf8-d579c2007c49)
