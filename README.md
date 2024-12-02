@@ -1,27 +1,136 @@
-AIML Project 2024
-Members:
-Uendi Caka
-Hedera Pema
-Neda Lozanovska
+**Artificial Intelligence and Machine Learning Project: Euphoria Dataset**
 
-1. Introduction
+*Project Overview*
 
-In this research, we develop a predictive model to comprehend and categorize virtual islands according to their degree of happiness using the "euphoria.csv" dataset. Features including the quantity of shelters, the accessibility of water sources, the size of the island, and the happiness score are all included in the dataset. In order to forecast and categorize islands according to their happiness score, exploratory data analysis (EDA), preprocessing, and machine learning methods are used.
+This project explores a dataset, euphoria.csv, which contains features related to islands in a virtual world. Each island's characteristics include happiness levels, amenities, and geographical information. The project's objective is to leverage machine learning techniques to predict the happiness index of the islands, analyze model performance, and identify the best model for prediction.
 
-There are two primary components to the project:
+**Step 1**: Dataset Details
 
-Data Preprocessing and Exploration: To comprehend the dataset, visualize important trends, and find missing values and outliers, we start by doing a thorough exploratory data analysis (EDA). To make sure the dataset is prepared for modeling, preprocessing procedures include handling missing data, encoding category variables, and scaling numerical features.
+The dataset includes features like:
+- Happiness levels
+- Island size
+- Amenities
+- Geographical coordinates
 
-Model Construction and Assessment: Depending on the objective variable, we will classify the problem as either a regression or classification task after the data has been preprocessed. We will compare the performance of at least three distinct machine learning models, including Random Forest, Decision Trees, and Linear Regression. Cross-validation will be used for hyperparameter adjustment in order to guarantee that the optimal model is chosen.
+**Key Libraries Used**
 
-In order to enable passengers to choose the best islands based on their tastes and the prediction model's findings, we plan to divide the islands into groups according to their degree of happiness throughout the project.
+The following libraries are used in this project:
 
-2. Methods
+```python
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.linear_model import LinearRegression
+from sklearn.svm import SVR
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_squared_error, r2_score
+```
 
-3. Experimental Design
 
-4. Results
+Based on the provided content and the style of the linked README template, here's how you can incorporate the provided information into a structured README file:
 
-5. Conclusions
+## EDA Analysis and Data Preprocessing
 
-# AIML303441
+This section details the steps taken to understand the dataset, summarize its main characteristics, and visualize it to derive insights.
+
+1. **Loading the Dataset to Have an Initial Overview**
+Objective: Display the column information, including their names and corresponding data types, to understand the dataset's structure.
+Steps:
+- Print the names and data types of the columns to give a detailed overview.
+- Display the first five rows of the dataset to provide a preview of its content.
+
+```python
+print("\nColumn Names and Data Types:")
+print(df.dtypes)
+print("\nFirst 5 Rows of the Dataset:")
+print(df.head())
+```
+
+**Output:**
+Column Names and Data Types:
+
+`referral_friends`: float64
+`water_sources`: float64
+`shelters`: float64
+`fauna_friendly`: object
+`island_size`                float64
+`creation_time`              float64
+`region`                      object
+`happiness_metric`            object
+`features`                    object
+`happiness_index`            float64
+`loyalty_score`              float64
+`total_refunds_requested`    float64
+`trade_goods`                 object
+`x_coordinate`               float64
+`avg_time_in_euphoria`       float64
+`y_coordinate`               float64
+`island_id`                  float64
+`entry_fee`                   object
+`nearest_city`                object
+`dtype`: object
+
+2. Evaluation:
+
+- Numerical Variables:
+Continuous data represented as float64.
+Examples: referral_friends, water_sources, loyalty_score, etc.
+
+- Categorical Variables:
+Non-numerical data represented as object.
+Examples: fauna_friendly, region, happiness_metric.
+
+- Observations:
+Certain columns like fauna_friendly appear to be multi-value categorical data.
+Missing values (NaN) exist in several rows, requiring preprocessing.
+The dataset is a mix of numerical and categorical features, suitable for different preprocessing techniques like encoding and normalization.
+
+3. Showing the dimension of the dataset: We can see that the dataset has 19 columns and 99492 rows.
+
+**2. Dropping Unnecessary Columns**
+Objective: Remove columns that are not relevant to predicting or understanding the happiness index.
+Steps:
+- Drop columns like creation_time, entry_fee, nearest_city, and trade_goods as they are either irrelevant or do not contribute to model building.
+- Save the cleaned dataset for further processing.
+```python
+columns_to_drop = ['creation_time', 'entry_fee', 'nearest_city', 'trade_goods']
+df_cleaned = df.drop(columns=columns_to_drop)
+cleaned_file_path = "cleaned_euphoria.csv"
+df_cleaned.to_csv(cleaned_file_path, index=False)
+print(f"Columns dropped: {columns_to_drop}")
+```
+Output:
+
+Columns dropped: ['creation_time', 'entry_fee', 'nearest_city', 'trade_goods']
+
+**3. Visualizing Missing Data**
+
+This step involves identifying and visualizing the missing data in the dataset to handle them effectively.
+
+**Objective:**
+- To check for missing data and visualize it for a better understanding of the dataset's structure and issues.
+
+**Steps**:
+1. Load the cleaned dataset from the file `cleaned_euphoria.csv`.
+2. Compute the summary of missing values for each column using `isnull().sum()`.
+3. Visualize the missing data using the `msno.matrix()` function for a graphical representation of missing values.
+
+**Code**:
+```python
+file_path = "cleaned_euphoria.csv"
+data_cleaned = pd.read_csv(file_path)
+
+print("\nMissing Values Summary:")
+print(data_cleaned.isnull().sum())
+msno.matrix(data_cleaned)
+plt.title("Missing Values Matrix")
+plt.show()
+```
+
+**Graphical Representation:**
+
+The graphical visualization below highlights missing data for each feature:
+<!--  -->
