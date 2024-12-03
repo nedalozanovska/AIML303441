@@ -431,6 +431,8 @@ plt.title('Correlation Heatmap')
 plt.tight_layout()
 plt.show()
 ```
+![image](https://github.com/user-attachments/assets/fc43c0a5-1ba2-44d1-a752-5c652838b2bb)
+
 
 **Analysis:**
 
