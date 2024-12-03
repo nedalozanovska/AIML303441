@@ -844,4 +844,22 @@ plt.show()
 **Observation:** Residuals are centered around 0, with a slight positive skew, indicating small biases in prediction.
 
 
+**Residuals vs Predicted Values Scatter Plot**
+
+**Code:** The provided code plots residuals (errors) against the predicted values.
+
+![image](https://github.com/user-attachments/assets/fdf107e9-e622-4fb1-8e12-07fe7ac53e24)
+
+**Graph Explanation:** The residuals are mostly centered around zero but show some spread, especially for higher predicted values. This indicates potential heteroscedasticity (variance of residuals increases with predicted values), which might impact the model's assumptions.
+
+![image](https://github.com/user-attachments/assets/fdf107e9-e622-4fb1-8e12-07fe7ac53e24)
+
+**Feature Importance**
+**Code:** The code generates a bar plot of feature importance as determined by the Random Forest model.
+
+**Graph Explanation:**
+The feature y_coordinate is the most influential in predicting the target (happiness_index), followed by island_size.
+Shelters is the least important, likely indicating that its variation has little impact on happiness levels.
+This information helps prioritize features for analysis or further engineering.
+
 
