@@ -838,6 +838,9 @@ plt.xlabel('Residuals')
 plt.ylabel('Frequency')
 plt.show()
 ```
+
+![image](https://github.com/user-attachments/assets/6cb8bcf9-c3a8-4dd9-aac8-9c5ec7496fd1)
+
 **Observation:** Residuals are centered around 0, with a slight positive skew, indicating small biases in prediction.
 
 
