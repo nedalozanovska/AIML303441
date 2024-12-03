@@ -226,10 +226,14 @@ The column is heavily skewed towards Monthly.
 Weekly has only 2 occurrences, making this column unfit for analysis.
 
 *Visualization:*
+![image](https://github.com/user-attachments/assets/84da3663-fd30-4aea-aa96-8dec8418b7ce)
+
 3. Features
 Analysis:
+
 High variability in combinations, e.g., `Parking, Gym,Pool`.
 Further aggregation or preprocessing is required.
+
 Key Findings:
 The `happiness_metric` column shows significant skew and low utility for analysis.
 The features column has high variability, requiring preprocessing or aggregation.
