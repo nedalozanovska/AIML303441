@@ -32,13 +32,8 @@ from sklearn.metrics import mean_squared_error, r2_score
 
 ## EDA Analysis and Data Preprocessing
 
-This section details the steps taken to understand the dataset, summarize its main characteristics, and visualize it to derive insights.
-
  1. **Loading the Dataset to Have an Initial Overview**
 Objective: Display the column information, including their names and corresponding data types, to understand the dataset's structure.
-Steps:
-- Print the names and data types of the columns to give a detailed overview.
-- Display the first five rows of the dataset to provide a preview of its content.
 
 ```python
 print("\nColumn Names and Data Types:")
@@ -75,14 +70,14 @@ Column Names and Data Types:
 
 - Numerical Variables:
 Continuous data represented as float64.
-Examples: referral_friends, water_sources, loyalty_score, etc.
+Examples: `referral_friends`, `water_sources`, `loyalty_score`, etc.
 
 - Categorical Variables:
 Non-numerical data represented as object.
-Examples: fauna_friendly, region, happiness_metric.
+Examples: `fauna_friendly`, `region`, `happiness_metri`c.
 
 - Observations:
-Certain columns like fauna_friendly appear to be multi-value categorical data.
+Certain columns like `fauna_friendly` appear to be multi-value categorical data.
 Missing values (NaN) exist in several rows, requiring preprocessing.
 The dataset is a mix of numerical and categorical features, suitable for different preprocessing techniques like encoding and normalization.
 
@@ -105,8 +100,6 @@ print(f"Columns dropped: {columns_to_drop}")
 Columns dropped: ['creation_time', 'entry_fee', 'nearest_city', 'trade_goods']
 
  **3. Visualizing Missing Data**
-
-This step involves identifying and visualizing the missing data in the dataset to handle them effectively.
 
 **Objective:**
 - To check for missing data and visualize it for a better understanding of the dataset's structure and issues.
@@ -135,12 +128,10 @@ The graphical visualization below highlights missing data for each feature:
 
 Next, there are notable levels of missing data in several columns:
 
-- `Referral_friends, Water_sources, and Shelters`: These columns have missing data, which should be addressed during data cleaning even though their level of missing data is not severe.
+- `Referral_friends`, `Water_sources`, and `Shelters`: These columns have missing data, which should be addressed during data cleaning even though their level of missing data is not severe.
 - `Region and Happiness_metric`: These columns also have missing data, but the amount is relatively moderate.
 - `Happiness_index and Loyalty_score`: While these columns exhibit missing data, the percentage is low enough to use imputation strategies without significant risk of data distortion.
 - `Fauna_friendly`: This column has a high percentage of missing values and requires specific handling.
-
-Addressing these missing values is crucial to ensure the integrity of the analysis and modeling steps.
 
 
  **4. Dropping Columns with Too Much Missing Data**
