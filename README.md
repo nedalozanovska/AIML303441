@@ -644,6 +644,8 @@ plt.xticks(x, models)
 plt.legend()
 plt.show()
 ```
+![image](https://github.com/user-attachments/assets/921dc618-7a0c-4ba3-b549-dd60f20aab0d)
+
 **Analysis**
 
 Random Forest Regressor is the clear winner with high R² and low MSE.It captures data complexities without overfitting and generalizes well.
