@@ -973,7 +973,7 @@ plt.show()
 - MSE Comparison: MSE shows a significant increase from the initial model to the tuned test stage due to generalization.
 - Comparison: R^2 shows a drop from the initial model to the tuned test stage, reflecting the reduced fit on unseen data.
 
-## Conclusions
+## Results
 **1. Model Performance:**
 
 > - Random Forest's strength: High R^2 (0.9565 for training, 0.9512 for validation) and low MSE (34,797.55 for training, 41,722.81 for validation) during initial evaluation highlighted its suitability.
@@ -989,8 +989,13 @@ plt.show()
 > - The difference in performance metrics (MSE and R^2) between training/validation and testing phases pointed to model complexity and possible dataset limitations.
 
 **Final Recommendations:** 
-> - Metrics to Improve: Focus on reducing test set MSE (currently 206,967.15) and increasing R^2
-(currently 0.7491).
-> - Future Work: Add additional predictors, such as socioeconomic or environmental variables, to address the unexplained variance and improve model generalization.
+> - We need to improve metrics including focusing on reducing test set MSE (currently 206,967.15) and increasing R^2 (currently 0.7491).
+> - We need to add Add additional predictors, such as socioeconomic or environmental variables, to address the unexplained variance and improve model generalization.
 > - Advanced Models: Explore techniques like boosting (e.g., XGBoost or Gradient Boosting) to compare performance with Random Forest.
+
+### Conclusion
+
+The primary takeaway from this work is the effectiveness of the Random Forest Regressor in predicting the happiness index of islands. By leveraging its capability to capture complex, non-linear relationships between features, it provided robust performance and interpretability. Compared to other models like Linear Regression and SVR, Random Forest achieved significantly higher accuracy and generalization, making it the optimal choice. Feature importance analysis revealed that geographic factors, such as `y_coordinate` and `island_size`, play a crucial role in determining happiness levels, offering actionable insights for policymakers and planners.
+
+However, some questions remain unanswered, such as whether additional features, like cultural or economic variables, could further improve predictions. The observed variance in residuals for extreme values also suggests room for refining the model to handle outliers better. Future work could focus on incorporating richer datasets, exploring ensemble techniques like boosting, or integrating interpretability tools to enhance model transparency further. Expanding the scope of the study to include cross-regional or temporal analysis could also provide deeper insights into the drivers of happiness.
   
