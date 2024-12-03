@@ -627,6 +627,8 @@ plt.xticks(x, models)
 plt.legend()
 plt.show()
 ```
+![image](https://github.com/user-attachments/assets/75fce38f-b415-4779-b470-bd9fff5428af)
+
 
 ```python
 train_mse = [629291.1379, 615721.6336, 34797.5485]
