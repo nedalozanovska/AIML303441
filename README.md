@@ -473,6 +473,8 @@ for j in range(i + 1, len(axes)):
 plt.tight_layout()
 plt.show()
 ```
+![image](https://github.com/user-attachments/assets/b0eec9d5-afea-4d9b-96a1-16293145239e)
+
 
 **Insights:**
 - *Skewness*: Features such as water_sources, shelters, and island_size show significant skewness, suggesting limited resources on most islands.
@@ -486,3 +488,31 @@ plt.show()
 3. *Encoded Categorical Data:* Converted features like region into numerical format using LabelEncoder.
 4. *Analyzed Distributions:* Examined numerical feature spreads and identified skewness or clustering trends.
 5. *Prepared Data:* The dataset is now ready for modeling and further analysis.
+
+## Defining the Problem
+**Objective:**
+- Use regression to predict the happiness_index based on island features like amenities, island size, and geographical coordinates.
+
+**Goal**: Understand how these features impact happiness and predict happiness for new islands.
+
+**Splitting the Dataset into Train and Test Sets**
+**Purpose:** Divide the dataset for training and evaluation.
+
+```python
+file_path = "cleaned_euphoria.csv"
+cleaned_euphoria = pd.read_csv(file_path)
+X = cleaned_euphoria.drop('happiness_index', axis=1)
+y = cleaned_euphoria['happiness_index']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+print("Training data shape:", X_train.shape)
+print("Test data shape:", X_test.shape)
+```
+
+**Output:**
+1. Training Data: 71,564 rows (samples) × 11 columns (features).
+2. Test Data: 17,891 rows (samples) × 11 columns (features).
+
+**Key Insight:**
+The dataset was split into training (80%) and testing (20%) sets. Both contain features and the target variable, preparing them for model training and validation.
