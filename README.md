@@ -235,8 +235,8 @@ High variability in combinations, e.g., `Parking, Gym,Pool`.
 Further aggregation or preprocessing is required.
 
 Key Findings:
-The `happiness_metric` column shows significant skew and low utility for analysis.
-The features column has high variability, requiring preprocessing or aggregation.
+   `happiness_metric` column shows significant skew and low utility for analysis.
+   The features column has high variability, requiring preprocessing or aggregation.
 Imbalances in categorical distributions, especially in region, need consideration in modeling.
 
 
