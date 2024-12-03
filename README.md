@@ -495,7 +495,7 @@ plt.show()
 
 **Goal**: Understand how these features impact happiness and predict happiness for new islands.
 
-**Splitting the Dataset into Train and Test Sets**
+**1. Splitting the Dataset into Train and Test Sets**
 **Purpose:** Divide the dataset for training and evaluation.
 
 ```python
@@ -516,3 +516,134 @@ print("Test data shape:", X_test.shape)
 
 **Key Insight:**
 The dataset was split into training (80%) and testing (20%) sets. Both contain features and the target variable, preparing them for model training and validation.
+
+**2. Creating a Validation Set from the Training Data**
+**Objective:** Avoid overfitting by splitting the training data into a new training set and a validation set (20% of the training set).
+**Purpose:** Tune hyperparameters and evaluate the model before final testing.
+
+```python
+X_train_new, X_val, y_train_new, y_val = train_test_split(X_train, y_train, test_size=0.2, random_state=42)
+
+print("New Training data shape:", `X_train_new.shape`)
+print("Validation data shape:", `X_val.shape`)
+```
+ **Output:**
+
+- New Training Data: 57,251 rows (samples) × 11 columns (features).
+- Validation Data: 14,313 rows (samples) × 11 columns (features).
+
+ **Key Insight:**
+- Training and Validation Split: An 80/20 split of the original training data.
+- Training Data (`X_train_new`, `y_train_new`) → Used for training the model.
+- Validation Data (`X_val`,`y_val`) → Used for hyperparameter tuning and early evaluation.
+
+  **2. Feature Scaling**  
+Numerical features are standardized to ensure consistent scaling across datasets, reducing bias from varying feature ranges.
+
+```python
+numerical_cols = X_train.select_dtypes(include=['float64', 'int64']).columns
+
+X_train_numerical = X_train[numerical_cols]
+X_test_numerical = X_test[numerical_cols]
+X_val_numerical = X_val[numerical_cols]
+
+scaler = StandardScaler()
+
+X_train_scaled = scaler.fit_transform(X_train_numerical)
+X_test_scaled = scaler.transform(X_test_numerical)
+X_val_scaled = scaler.transform(X_val_numerical)
+
+scaling_results = pd.DataFrame({
+    "Dataset": ["Training", "Test", "Validation"],
+    "Mean": [X_train_scaled.mean(axis=0).mean(),
+             X_test_scaled.mean(axis=0).mean(),
+             X_val_scaled.mean(axis=0).mean()],
+    "Std": [X_train_scaled.std(axis=0).mean(),
+            X_test_scaled.std(axis=0).mean(),
+            X_val_scaled.std(axis=0).mean()]
+})
+
+print(scaling_results)
+```
+**Summary:**
+The training data is scaled correctly with a mean close to 0 and a standard deviation of 1. The test and validation datasets show similar scaling, ensuring uniformity and preventing bias. Proper scaling prepares data for effective model training and evaluation.
+
+## Selecting models
+**Objective**:
+> We use regression to predict the "happiness index" of the islands, as it is a continuous variable that quantifies the well-being of each island.
+
+- Linear Regression: Establishes a simple linear relationship between features and the happiness index.
+- Random Forest: Captures non-linear relationships and feature interactions for deeper insights.
+- Support Vector Regression (SVR): Handles high-dimensional data and non-linear relationships effectively.
+- Model Strategy: Train, evaluate, and compare all models on the cleaned dataset.
+- Hyperparameter Tuning: Use cross-validation to optimize the best-performing model.
+- Final Comparison: Compare model performance before and after tuning.
+
+**Defining the models**
+
+- We define three different regression models for our machine learning task.
+
+```python
+lr = LinearRegression()
+svr = SVR()
+rf = RandomForestRegressor(random_state=42)
+```
+**Evaluating the initial model performances**
+
+-We trained three models and evaluated them using `Mean Squared Error (MSE)` and `R-squared (R²)` scores on both training and validation sets. Below are the key results:
+
+**Linear Regression**
+- Training R²: 0.2126, Validation R²: 0.2011
+- Training MSE: 629291.1379, Validation MSE: 682708.1118
+- Shows underfitting and performs poorly on unseen data.
+
+**Support Vector Regression (SVR)**
+- Training R²: 0.2296, Validation R²: 0.2191
+- Training MSE: 615721.6336, Validation MSE: 667321.3802
+- Slightly better than Linear Regression but still underfitting.
+
+**Random Forest Regressor**
+- Training R²: 0.9565, Validation R²: 0.9512
+- Training MSE: 34797.5485, Validation MSE: 41722.8119
+- Excellent performance with high accuracy and generalization.
+
+**Bar Plots for R² and MSE scores**
+
+```python
+models = ['Linear Regression', 'SVR', 'Random Forest']
+train_r2 = [0.2126, 0.2296, 0.9565]
+val_r2 = [0.2011, 0.2191, 0.9512]
+
+x = np.arange(len(models))
+width = 0.35
+
+plt.bar(x - width/2, train_r2, width, label='Training R²', color='blue')
+plt.bar(x + width/2, val_r2, width, label='Validation R²', color='orange')
+
+plt.xlabel('Models')
+plt.ylabel('R² Score')
+plt.title('R² Scores for Models')
+plt.xticks(x, models)
+plt.legend()
+plt.show()
+```
+
+```python
+train_mse = [629291.1379, 615721.6336, 34797.5485]
+val_mse = [682708.1118, 667321.3802, 41722.8119]
+
+plt.bar(x - width/2, train_mse, width, label='Training MSE', color='green')
+plt.bar(x + width/2, val_mse, width, label='Validation MSE', color='red')
+
+plt.xlabel('Models')
+plt.ylabel('MSE')
+plt.title('MSE Scores for Models')
+plt.xticks(x, models)
+plt.legend()
+plt.show()
+```
+**Analysis**
+
+Random Forest Regressor is the clear winner with high R² and low MSE.It captures data complexities without overfitting and generalizes well.
+
+
