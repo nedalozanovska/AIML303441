@@ -650,4 +650,156 @@ plt.show()
 
 Random Forest Regressor is the clear winner with high R² and low MSE.It captures data complexities without overfitting and generalizes well.
 
+**Hyperparameter Tuning**
+
+-We'll use `RandomizedSearchCV` to test various combinations of hyperparameters for the Random Forest model.
+
+1. **n_estimators** is the number of decision trees in the forest.
+
+2. **max_depth** is the maximum depth of each tree, it controls how complex each tree can become.
+
+3. **min_samples_split** is the minimum number of samples required to split an internal node.
+
+4. **min_samples_leaf** is the minimum number of samples required to be at a leaf node.
+
+5. **max_features** is the number of features to consider when looking for the best split.
+
+6. **bootstrap**, whether to use bootstrapping when sampling data for training.
+
+- Samples hyperparameter combinations, which reduces the time and computational cost compared to trying all combinations in `GridSearchCV`.
+
+```python
+from sklearn.model_selection import RandomizedSearchCV
+
+rf = RandomForestRegressor(random_state=42)
+
+param_dist = {
+    'n_estimators': [100, 200, 300],
+    'max_depth': [10, 20, 30, None],
+    'min_samples_split': [2, 5, 10],
+    'min_samples_leaf': [1, 2, 4],
+    'max_features': ['sqrt'],
+    'bootstrap': [True, False]
+}
+
+random_search = RandomizedSearchCV(
+    estimator=rf,
+    param_distributions=param_dist,
+    n_iter=10,
+    scoring='neg_mean_squared_error',
+    cv=3,
+    n_jobs=-1,
+    verbose=0,
+    random_state=42
+)
+
+random_search.fit(X_train_scaled, y_train)
+
+print("Best parameters found: ", random_search.best_params_)
+print("Best CV MSE score: ", -random_search.best_score_)
+```
+**Conclusion:**
+Best hyperparameters for Random Forest:
+
+- n_estimators: 100 (uses 100 trees in the forest).
+- min_samples_split: 5 (minimum samples to split a node).
+- min_samples_leaf: 2 (minimum samples at a leaf node).
+- max_features: 'sqrt' (uses the square root of total features for splitting).
+- max_depth: None (trees grow until all leaves are pure or less than min_samples_split).
+- bootstrap: False (does not use bootstrap sampling).
+- Best CV MSE: 242250.28 (indicates moderate performance).
+
+### Training the Model
+```python
+from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+
+best_rf = RandomForestRegressor(
+    n_estimators=100,
+    min_samples_split=5,
+    min_samples_leaf=2,
+    max_features='sqrt',
+    max_depth=None,
+    bootstrap=False,
+    random_state=42
+)
+
+best_rf.fit(X_train_scaled, y_train)
+
+y_test_pred = best_rf.predict(X_test_scaled)
+
+test_mse = mean_squared_error(y_test, y_test_pred)
+test_rmse = np.sqrt(test_mse)
+test_mae = mean_absolute_error(y_test, y_test_pred)
+test_r2 = r2_score(y_test, y_test_pred)
+print(f"Test MSE: {test_mse:.4f}")
+print(f"Test RMSE: {test_rmse:.4f}")
+print(f"Test MAE: {test_mae:.4f}")
+print(f"Test R²: {test_r2:.4f}")
+
+```
+
+- **Test MSE**: 206,967.1458  
+  Indicates a moderate error, suggesting the model predictions are somewhat off but typical for complex tasks.  
+
+- **Test RMSE**: 454.9364  
+  Shows that, on average, predictions deviate by ~455 units, which is reasonable for regression tasks.  
+
+- **Test MAE**: 212.7307  
+  Suggests most predictions are off by ~213 units, demonstrating a moderate level of accuracy.  
+
+- **Test R²**: 0.7491  
+  The model explains ~75% of the variance in the target variable, indicating a strong fit and good prediction capabilities.  
+
+**Conclusion**:  
+The Random Forest model performs well with good predictive accuracy and effectively fits the test data, making it suitable for predicting the happiness index.
+
+**Retraining the Model with Optimal Hyperparameters**
+
+We retrained the Random Forest model using the best hyperparameters obtained from tuning to improve prediction accuracy.
+
+**Code:**
+
+```python
+# Retrain the model with optimal hyperparameters
+best_rf = RandomForestRegressor(
+    n_estimators=100,
+    min_samples_split=5,
+    min_samples_leaf=2,
+    max_features='sqrt',
+    max_depth=None,
+    bootstrap=False,
+    random_state=42
+)
+
+# Fit the model on the training data
+best_rf.fit(X_train_scaled, y_train)
+
+# Make predictions on the test set
+y_pred_test = best_rf.predict(X_test_scaled)
+
+# Evaluate the model
+mse = mean_squared_error(y_test, y_pred_test)
+rmse = np.sqrt(mse)
+mae = mean_absolute_error(y_test, y_pred_test)
+r2 = r2_score(y_test, y_pred_test)
+
+print(f"Test MSE: {mse:.4f}")
+print(f"Test RMSE: {rmse:.4f}")
+print(f"Test MAE: {mae:.4f}")
+print(f"Test R²: {r2:.4f}")
+```
+**Analysis:**
+
+The tuned Random Forest model shows strong predictive performance.
+An R² score of 0.7491 indicates that the model explains approximately 75% of the variance in the happiness index.
+Lower error metrics (MSE, RMSE, MAE) reflect improved accuracy over initial models.
+
+**Conclusion:**
+
+Hyperparameter tuning significantly enhanced the model's ability to predict the happiness index.
+The final model effectively captures the relationships between island features and happiness levels.
+
+
+
 
