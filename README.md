@@ -407,6 +407,8 @@ sns.pairplot(df_cleaned[important_features], height=2.5, aspect=1, plot_kws={'al
 plt.subplots_adjust(hspace=0.3, wspace=0.3)
 plt.show()
 ```
+![image](https://github.com/user-attachments/assets/2916a894-d08a-49d5-9fa8-c8bb93e02405)
+
 **Analysis:**
 
 - Removing outliers clarified the relationships between features.
