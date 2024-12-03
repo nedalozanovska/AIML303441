@@ -480,9 +480,9 @@ plt.show()
 - *Target Association*: happiness_index distribution indicates a relationship with resource availability.
   
 *Summary of Data Cleaning Process:*
-1)*Handled Missing Values:* Missing data was imputed effectively using KNN Imputer.
+1. *Handled Missing Values:* Missing data was imputed effectively using KNN Imputer.
 20
-2) *Dropped Columns:* Removed irrelevant or redundant columns like island_id and others with low correlation to happiness_index.
-3) *Encoded Categorical Data:* Converted features like region into numerical format using LabelEncoder.
-4) *Analyzed Distributions:* Examined numerical feature spreads and identified skewness or clustering trends.
-5) *Prepared Data:* The dataset is now ready for modeling and further analysis.
+2.  *Dropped Columns:* Removed irrelevant or redundant columns like island_id and others with low correlation to happiness_index.
+3. *Encoded Categorical Data:* Converted features like region into numerical format using LabelEncoder.
+4. *Analyzed Distributions:* Examined numerical feature spreads and identified skewness or clustering trends.
+5. *Prepared Data:* The dataset is now ready for modeling and further analysis.
