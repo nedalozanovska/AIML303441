@@ -822,6 +822,7 @@ plt.ylabel('Residuals')
 plt.show()
 **Observation:** Residuals are mostly centered around 0, indicating a decent model fit, but some outliers suggest occasional prediction errors.
 ```
+![image](https://github.com/user-attachments/assets/15d4fd91-26ef-493e-9627-1f9171bc0266)
 
 
 **Observation:** Residuals are mostly centered around 0, indicating a decent model fit, but some outliers suggest occasional prediction errors.
