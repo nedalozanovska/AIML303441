@@ -975,8 +975,8 @@ plt.show()
 ## Results
 **1. Model Performance:**
 
-> - Random Forest's strength: High R^2 (0.9565 for training, 0.9512 for validation) and low MSE (34,797.55 for training, 41,722.81 for validation) during initial evaluation highlighted its suitability.
-> - Tuning Impact: After hyperparameter tuning, the Random Forest model’s R^2 on the test set decreased to 0.7491, with a significant MSE increase to 206,967.15. While this highlights a reduction in overfitting, it also shows limitations in generalization.
+> - Random Forest's strength consists of High R^2 (0.9565 for training, 0.9512 for validation) and low MSE (34,797.55 for training, 41,722.81 for validation) during initial evaluation highlighted its suitability.
+> -  After hyperparameter tuning, the Random Forest model’s R^2 on the test set decreased to 0.7491, with a significant MSE increase to 206,967.15. While this highlights a reduction in overfitting, it also shows limitations in generalization.
 
 **2. Insights into Predictors:**
 > - Spatial features (y_coordinate and x_coordinate) and physical attributes (island_size) contributed the most to predicting happiness.
