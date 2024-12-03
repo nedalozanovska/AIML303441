@@ -823,6 +823,9 @@ plt.show()
 **Observation:** Residuals are mostly centered around 0, indicating a decent model fit, but some outliers suggest occasional prediction errors.
 ```
 
+
+**Observation:** Residuals are mostly centered around 0, indicating a decent model fit, but some outliers suggest occasional prediction errors.
+
 **Histogram of Residuals**
 **Description:** Shows the distribution of residuals to check for normality or skewness.
 
