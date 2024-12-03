@@ -847,15 +847,41 @@ plt.show()
 **Residuals vs Predicted Values Scatter Plot**
 
 **Code:** The provided code plots residuals (errors) against the predicted values.
+```python
+plt.figure(figsize=(10, 6))
+plt.scatter(y_pred, residuals, color='blue', alpha=0.6)
+plt.axhline(y=0, color='black', linestyle='--')
+plt.title('Residuals vs Predicted Values')
+plt.xlabel('Predicted Values')
+plt.ylabel('Residuals')
+plt.show()
+```
 
 ![image](https://github.com/user-attachments/assets/fdf107e9-e622-4fb1-8e12-07fe7ac53e24)
 
 **Graph Explanation:** The residuals are mostly centered around zero but show some spread, especially for higher predicted values. This indicates potential heteroscedasticity (variance of residuals increases with predicted values), which might impact the model's assumptions.
 
-![image](https://github.com/user-attachments/assets/fdf107e9-e622-4fb1-8e12-07fe7ac53e24)
 
 **Feature Importance**
 **Code:** The code generates a bar plot of feature importance as determined by the Random Forest model.
+
+```python
+importances = best_rf.feature_importances_
+
+indices = np.argsort(importances)[::-1]
+
+features = X_train.columns
+
+plt.figure(figsize=(10, 6))
+plt.title("Feature Importances")
+plt.barh(features[indices], importances[indices], align="center")
+plt.xlabel("Relative Importance")
+plt.ylabel("Feature")
+plt.show()
+```
+
+
+![image](https://github.com/user-attachments/assets/22d8d3b2-323c-4b2e-89ee-1828cda41603)
 
 **Graph Explanation:**
 The feature y_coordinate is the most influential in predicting the target (happiness_index), followed by island_size.
