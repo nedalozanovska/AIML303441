@@ -993,7 +993,7 @@ plt.show()
 > - We need to add Add additional predictors, such as socioeconomic or environmental variables, to address the unexplained variance and improve model generalization.
 > - Advanced Models: Explore techniques like boosting (e.g., XGBoost or Gradient Boosting) to compare performance with Random Forest.
 
-### Conclusion
+## Conclusion
 
 The primary takeaway from this work is the effectiveness of the Random Forest Regressor in predicting the happiness index of islands. By leveraging its capability to capture complex, non-linear relationships between features, it provided robust performance and interpretability. Compared to other models like Linear Regression and SVR, Random Forest achieved significantly higher accuracy and generalization, making it the optimal choice. Feature importance analysis revealed that geographic factors, such as `y_coordinate` and `island_size`, play a crucial role in determining happiness levels, offering actionable insights for policymakers and planners.
 
