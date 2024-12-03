@@ -469,9 +469,8 @@ plt.show()
 - *Clustering*: region and x_coordinate distributions suggest geographical patterns.
 - *Target Association*: happiness_index distribution indicates a relationship with resource availability.
   
-*Summary of Data Cleaning Process:*
+**Summary of Data Cleaning Process:**
 1. *Handled Missing Values:* Missing data was imputed effectively using KNN Imputer.
-20
 2.  *Dropped Columns:* Removed irrelevant or redundant columns like island_id and others with low correlation to happiness_index.
 3. *Encoded Categorical Data:* Converted features like region into numerical format using LabelEncoder.
 4. *Analyzed Distributions:* Examined numerical feature spreads and identified skewness or clustering trends.
@@ -479,9 +478,7 @@ plt.show()
 
 ## Defining the Problem
 **Objective:**
-- Use regression to predict the happiness_index based on island features like amenities, island size, and geographical coordinates.
-
-**Goal**: Understand how these features impact happiness and predict happiness for new islands.
+- Use regression to predict the happiness_index based on island features like amenities, island size, and geographical coordinates.Understand how these features impact happiness and predict happiness for new islands.
 
 **1. Splitting the Dataset into Train and Test Sets**
 **Purpose:** Divide the dataset for training and evaluation.
@@ -636,7 +633,7 @@ plt.show()
 
 **Analysis**
 
-Random Forest Regressor is the clear winner with high R² and low MSE.It captures data complexities without overfitting and generalizes well.
+Random Forest Regressor is the clear winner with high R² and low MSE. It captures data complexities without overfitting and generalizes well.
 
 **Hyperparameter Tuning**
 
@@ -697,7 +694,7 @@ Best hyperparameters for Random Forest:
 - bootstrap: False (does not use bootstrap sampling).
 - Best CV MSE: 242250.28 (indicates moderate performance).
 
-### Training the Model
+## Training the Model
 ```python
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
@@ -791,7 +788,6 @@ Lower error metrics (MSE, RMSE, MAE) reflect improved accuracy over initial mode
 Hyperparameter tuning significantly enhanced the model's ability to predict the happiness index.
 The final model effectively captures the relationships between island features and happiness levels.
 
-## Plotting residuals
 
 **Residual Plot**
 **Description:** Displays residuals (difference between actual and predicted values) to assess model fit and identify patterns or biases.
@@ -876,7 +872,7 @@ The feature y_coordinate is the most influential in predicting the target (happi
 Shelters is the least important, likely indicating that its variation has little impact on happiness levels.
 This information helps prioritize features for analysis or further engineering.
 
-### Comparing the performance of the initial model versus the trained model
+**Comparing the performance of the initial model versus the trained model**
 
 - A comparison of model performance metrics at different stages of training, validation, and testing. It evaluates the Mean Squared Error (MSE) and \( R^2 \) (R-squared) values for the Random Forest model.
 
