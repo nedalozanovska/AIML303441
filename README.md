@@ -36,7 +36,7 @@ Based on the provided content and the style of the linked README template, here'
 
 This section details the steps taken to understand the dataset, summarize its main characteristics, and visualize it to derive insights.
 
-1. **Loading the Dataset to Have an Initial Overview**
+ 1. **Loading the Dataset to Have an Initial Overview**
 Objective: Display the column information, including their names and corresponding data types, to understand the dataset's structure.
 Steps:
 - Print the names and data types of the columns to give a detailed overview.
@@ -90,7 +90,7 @@ The dataset is a mix of numerical and categorical features, suitable for differe
 
 3. Showing the dimension of the dataset: We can see that the dataset has 19 columns and 99492 rows.
 
-**2. Dropping Unnecessary Columns**
+ **2. Dropping Unnecessary Columns**
 Objective: Remove columns that are not relevant to predicting or understanding the happiness index.
 Steps:
 - Drop columns like creation_time, entry_fee, nearest_city, and trade_goods as they are either irrelevant or do not contribute to model building.
@@ -106,7 +106,7 @@ print(f"Columns dropped: {columns_to_drop}")
 
 Columns dropped: ['creation_time', 'entry_fee', 'nearest_city', 'trade_goods']
 
-**3. Visualizing Missing Data**
+ **3. Visualizing Missing Data**
 
 This step involves identifying and visualizing the missing data in the dataset to handle them effectively.
 
@@ -145,7 +145,7 @@ Next, there are notable levels of missing data in several columns:
 Addressing these missing values is crucial to ensure the integrity of the analysis and modeling steps.
 
 
-**4. Dropping Columns with Too Much Missing Data**
+ **4. Dropping Columns with Too Much Missing Data**
 
 - **Objective**: Determine which columns to drop due to excessive missing values.
 - **Steps**:
@@ -164,7 +164,7 @@ print(missing_percentage)
 data_cleaned = data_cleaned.drop(columns=['fauna_friendly'])
 data_cleaned.to_csv("cleaned_euphoria.csv", index=False)
 ```
-**5.Histogram for numerical features**
+ **5.Histogram for numerical features**
 
 -We create histograms for all numerical columns in the dataset to visualize the distribution of each feature, to help us identify patterns such as skewness, normality, or outliers. 
 
@@ -239,5 +239,42 @@ Key Findings:
    The features column has high variability, requiring preprocessing or aggregation.
 Imbalances in categorical distributions, especially in region, need consideration in modeling.
 
+**Analysis of the `happiness_metric` Column**
 
+**Problem Description**
+The `happiness_metric` column shows extreme imbalance:
+- **"Monthly"** is overwhelmingly dominant with **89,564 instances**.
+- **"Weekly"** appears only **2 times**.
 
+This imbalance indicates:
+1. Potential data entry issues.
+2. Underrepresentation of the "Weekly" metric in the dataset.
+
+**Steps Taken:**
+1. **Visualize the distribution:**
+   - Created a histogram to check for skewness in the `happiness_metric` column.
+
+2. **Code:**
+ ```python
+   plt.figure(figsize=(8, 5))
+   sns.histplot(data_cleaned['happiness_metric'], kde=True, color='blue', bins=30)
+   plt.title("Distribution of Happiness Metric", fontsize=14)
+   plt.xlabel("Happiness Metric")
+   plt.ylabel("Frequency")
+   plt.show()
+```
+**Key Findings:**
+
+The histogram clearly demonstrates the overwhelming dominance of "Monthly."
+The extreme skew makes the column unsuitable for numerical or categorical analysis.
+*Decision:*
+- The column is dropped from the dataset because:
+- It does not differentiate between most islands.
+- It provides little information for predictive modeling.
+- 
+Code for Dropping the Column:
+```python
+data_cleaned = data_cleaned.drop(columns=['happiness_metric'])
+updated_file_path = "cleaned_euphoria.csv"
+data_cleaned.to_csv(updated_file_path, index=False)
+```
