@@ -30,8 +30,6 @@ from sklearn.metrics import mean_squared_error, r2_score
 ```
 
 
-Based on the provided content and the style of the linked README template, here's how you can incorporate the provided information into a structured README file:
-
 ## EDA Analysis and Data Preprocessing
 
 This section details the steps taken to understand the dataset, summarize its main characteristics, and visualize it to derive insights.
