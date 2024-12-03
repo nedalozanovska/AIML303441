@@ -888,4 +888,82 @@ The feature y_coordinate is the most influential in predicting the target (happi
 Shelters is the least important, likely indicating that its variation has little impact on happiness levels.
 This information helps prioritize features for analysis or further engineering.
 
+### Comparing the performance of the initial model versus the trained model
 
+- A comparison of model performance metrics at different stages of training, validation, and testing. It evaluates the Mean Squared Error (MSE) and \( R^2 \) (R-squared) values for the Random Forest model.
+
+```python
+initial_training_mse = 34797.5485
+initial_training_r2 = 0.9565
+initial_validation_mse = 41722.8119
+initial_validation_r2 = 0.9512
+tuned_test_mse = 206967.1458
+tuned_test_r2 = 0.7491
+
+metrics = ['MSE', 'R^2']
+initial_values = [initial_training_mse, initial_training_r2]
+validation_values = [initial_validation_mse, initial_validation_r2]
+tuned_values = [tuned_test_mse, tuned_test_r2]
+
+x = np.arange(len(metrics))
+width = 0.25
+
+plt.figure(figsize=(10, 6))
+plt.bar(x - width, initial_values, width, label='Initial (Training)', color='skyblue')
+plt.bar(x, validation_values, width, label='Initial (Validation)', color='orange')
+plt.bar(x + width, tuned_values, width, label='Tuned (Test)', color='green')
+
+plt.xlabel('Evaluation Metric')
+plt.ylabel('Metric Value')
+plt.title('Comparison of Model Performance')
+plt.xticks(x, metrics)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.legend()
+
+for i in range(len(metrics)):
+    plt.text(x[i] - width, initial_values[i] + 0.02 * max(tuned_values), f"{initial_values[i]:.2f}", ha='center')
+    plt.text(x[i], validation_values[i] + 0.02 * max(tuned_values), f"{validation_values[i]:.2f}", ha='center')
+    plt.text(x[i] + width, tuned_values[i] + 0.02 * max(tuned_values), f"{tuned_values[i]:.2f}", ha='center')
+
+plt.tight_layout()
+plt.show()
+```
+*Observations*
+- MSE (Mean Squared Error): Initially, the model performed well on training and validation data (low MSE).
+- R^2: Initial training and validation are high indicating a good fit to the data. The tuned models R^2 on the test set is lower , showing reduced predictive power.
+
+**The subplots**
+
+```python
+stages = ['Initial (Training)', 'Initial (Validation)', 'Tuned (Test)']
+mse_values = [initial_training_mse, initial_validation_mse, tuned_test_mse]
+r2_values = [initial_training_r2, initial_validation_r2, tuned_test_r2]
+
+plt.figure(figsize=(12, 6))
+
+plt.subplot(1, 2, 1)
+plt.plot(stages, mse_values, marker='o', linestyle='-', color='blue', label='MSE')
+plt.title('MSE Comparison')
+plt.xlabel('Stage')
+plt.ylabel('Mean Squared Error')
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+for i, val in enumerate(mse_values):
+    plt.text(i, val + 0.02 * max(mse_values), f"{val:.2f}", ha='center')
+plt.xticks(rotation=15)
+
+plt.subplot(1, 2, 2)
+plt.plot(stages, r2_values, marker='o', linestyle='-', color='green', label='R^2')
+plt.title('R^2 Comparison')
+plt.xlabel('Stage')
+plt.ylabel('R^2 Score')
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+for i, val in enumerate(r2_values):
+    plt.text(i, val + 0.02 * max(r2_values), f"{val:.4f}", ha='center')
+plt.xticks(rotation=15)
+
+plt.tight_layout()
+plt.show()
+```
+**Observations from Subplots**
+- MSE Comparison: MSE shows a significant increase from the initial model to the tuned test stage due to generalization.
+- Comparison: R^2 shows a drop from the initial model to the tuned test stage, reflecting the reduced fit on unseen data.  
