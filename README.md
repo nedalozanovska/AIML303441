@@ -415,3 +415,36 @@ plt.show()
 `happiness_inde`x correlates positively with `island_size`, implying larger islands provide amenities contributing to happiness.
 - `total_refunds_requested` shows variability but little correlation with `happiness_index`.
 
+**10. Correlation Heatmap**
+
+-A heatmap was generated to visualize correlations between numerical features to identify strongly correlated features that might influence the target variable or require feature engineering.
+
+```python
+df_cleaned = pd.read_csv("cleaned_euphoria.csv")
+correlation_matrix = df_cleaned.corr()
+plt.figure(figsize=(12, 10))
+sns.heatmap(
+    correlation_matrix, annot=True, fmt='.2f', cmap='coolwarm', vmin=-1, vmax=1,
+    linewidths=0.5, square=True, cbar_kws={"shrink": 0.8}
+)
+plt.title('Correlation Heatmap')
+plt.tight_layout()
+plt.show()
+```
+
+**Analysis:**
+
+-The heatmap reveals the following key insights:
+
+- `referral_friends` and `total_refunds_requested` have a correlation of 0 with the target variable `happiness_index`.
+- Columns with no significant correlation to the target variable are not useful for predictive analysis and should be dropped.
+
+```python
+df_cleaned = pd.read_csv("cleaned_euphoria.csv")
+columns_to_drop = ['referral_friends', 'total_refunds_requested']
+df_cleaned.drop(columns=columns_to_drop, inplace=True)
+df_cleaned.to_csv("cleaned_euphoria.csv", index=False)
+```
+**Outcome:**
+
+Dropped `referral_friends` and `total_refunds_requested` due to their lack of correlation with the target variable, improving the dataset for predictive modeling.
