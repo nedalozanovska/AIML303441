@@ -1,9 +1,9 @@
 **Artificial Intelligence and Machine Learning Project: Euphoria Dataset**
 
 *Team Members*
-Uendi Caka
-Neda Lozanovska
-Hedera Pema
+-Uendi Caka
+-Neda Lozanovska
+-Hedera Pema
 
 *Project Overview*
 
