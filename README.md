@@ -966,6 +966,9 @@ plt.xticks(rotation=15)
 plt.tight_layout()
 plt.show()
 ```
+
+![image](https://github.com/user-attachments/assets/2329c17f-814e-4e85-bd3e-3022bdfe1ce5)
+
 **Observations from Subplots**
 - MSE Comparison: MSE shows a significant increase from the initial model to the tuned test stage due to generalization.
 - Comparison: R^2 shows a drop from the initial model to the tuned test stage, reflecting the reduced fit on unseen data.  
