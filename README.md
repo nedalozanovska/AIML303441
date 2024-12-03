@@ -789,6 +789,9 @@ print(f"Test RMSE: {rmse:.4f}")
 print(f"Test MAE: {mae:.4f}")
 print(f"Test R²: {r2:.4f}")
 ```
+
+![image](https://github.com/user-attachments/assets/9334200f-4ce6-4d03-8da3-4002f9d04f68)
+
 **Analysis:**
 
 The tuned Random Forest model shows strong predictive performance.
@@ -800,6 +803,38 @@ Lower error metrics (MSE, RMSE, MAE) reflect improved accuracy over initial mode
 Hyperparameter tuning significantly enhanced the model's ability to predict the happiness index.
 The final model effectively captures the relationships between island features and happiness levels.
 
+## Plotting residuals
+
+**Residual Plot**
+**Description:** Displays residuals (difference between actual and predicted values) to assess model fit and identify patterns or biases.
+
+```python
+y_pred = best_rf.predict(X_test_scaled)
+
+residuals = y_test - y_pred
+
+plt.figure(figsize=(10, 6))
+plt.scatter(range(len(residuals)), residuals, color='blue', alpha=0.6)
+plt.axhline(y=0, color='black', linestyle='--')
+plt.title('Residuals')
+plt.xlabel('Index')
+plt.ylabel('Residuals')
+plt.show()
+**Observation:** Residuals are mostly centered around 0, indicating a decent model fit, but some outliers suggest occasional prediction errors.
+```
+
+**Histogram of Residuals**
+**Description:** Shows the distribution of residuals to check for normality or skewness.
+
+```python
+plt.figure(figsize=(10, 6))
+sns.histplot(residuals, kde=True, color='blue', bins=20)
+plt.title('Distribution of Residuals')
+plt.xlabel('Residuals')
+plt.ylabel('Frequency')
+plt.show()
+```
+**Observation:** Residuals are centered around 0, with a slight positive skew, indicating small biases in prediction.
 
 
 
