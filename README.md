@@ -278,3 +278,81 @@ data_cleaned = data_cleaned.drop(columns=['happiness_metric'])
 updated_file_path = "cleaned_euphoria.csv"
 data_cleaned.to_csv(updated_file_path, index=False)
 ```
+
+**7. Encoding Categorical Features**
+
+**Summary:**
+Categorical features are encoded to ensure compatibility with machine learning models. Special handling is applied to the `features` column to preserve meaningful information by grouping amenities into broader categories before encoding.
+
+**Steps:**
+1. Group amenities into categories like Basic Amenities, Luxury Features, Connectivity Features, Appliances, and Building Features.
+2. Encode the grouped features into binary columns.
+3. Drop the original `features` column.
+4. Use Label Encoding for the remaining categorical columns.
+
+```python
+df_cleaned = pd.read_csv("cleaned_euphoria.csv")
+feature_groups = {
+    'Basic Amenities': ['Parking', 'Pool', 'Patio/Deck', 'Storage', 'Elevator'],
+    'Luxury Features': ['Gym', 'Clubhouse', 'Tennis', 'Fireplace', 'Hot Tub', 'View'],
+    'Connectivity Features': ['Internet Access', 'Cable or Satellite', 'TV'],
+    'Appliances': ['Dishwasher', 'Refrigerator', 'Washer Dryer', 'Garbage Disposal'],
+    'Building Features': ['Gated', 'Doorman', 'Wood Floors']
+}
+
+def encode_features_group(row, group_features):
+    if isinstance(row, str):
+        return any(feature in row for feature in group_features)
+    return False
+
+for group_name, features in feature_groups.items():
+    df_cleaned[group_name] = df_cleaned['features'].apply(lambda x: encode_features_group(x, features))
+df_cleaned.drop(columns=['features'], inplace=True)
+df_cleaned.to_csv("cleaned_euphoria.csv", index=False)
+print(df_cleaned.head())
+```
+```python
+df_cleaned = pd.read_csv("cleaned_euphoria.csv")
+categorical_features = df_cleaned.select_dtypes(include=['object']).columns
+label_encoder = LabelEncoder()
+
+for col in categorical_features:
+    df_cleaned[col] = label_encoder.fit_transform(df_cleaned[col])
+df_cleaned.to_csv("cleaned_euphoria.csv", index=False)
+print(df_cleaned.head())
+```
+
+**Key Findings:**
+The dataset now contains numerical values for previously categorical columns.
+Features like `region and grouped amenities` have been successfully encoded.
+Missing values in other columns (e.g., `shelters`, `features`, `x_coordinate`) need separate handling.
+
+**8. Handling Missing Values**
+
+We used the KNN Imputation technique to fill in missing values based on the similarity of data points. Scaling was applied before imputation to ensure consistent distance calculations, and scaling was reversed post-imputation.
+
+**Code:**
+```python
+from sklearn.impute import KNNImputer
+
+df_cleaned = pd.read_csv("cleaned_euphoria.csv")
+numerical_cols = df_cleaned.select_dtypes(include=['float64', 'int64']).columns
+scaler = StandardScaler()
+scaled_data = scaler.fit_transform(df_cleaned[numerical_cols])
+
+knn_imputer = KNNImputer(n_neighbors=5)
+imputed_data = knn_imputer.fit_transform(scaled_data)
+
+imputed_data = scaler.inverse_transform(imputed_data)
+df_cleaned[numerical_cols] = imputed_data
+
+print("\nMissing Values After Imputation:")
+print(df_cleaned.isnull().sum())
+
+df_cleaned.to_csv("cleaned_euphoria.csv", index=False)
+```
+
+**Analysis:**
+
+Missing values in numerical columns were successfully filled using KNN Imputation.
+All numerical columns now have 0 missing values, ensuring a clean dataset for further analysis.
