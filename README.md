@@ -356,3 +356,60 @@ df_cleaned.to_csv("cleaned_euphoria.csv", index=False)
 
 Missing values in numerical columns were successfully filled using KNN Imputation.
 All numerical columns now have 0 missing values, ensuring a clean dataset for further analysis.
+
+**9. Detecting and Removing Outliers**
+
+-The Interquartile Range (IQR) is used to detect outliers by measuring the spread of the middle 50% of the data, specifically between the 25th percentile (Q1) and the 75th percentile (Q3). Points outside this range, beyond 1.5 IQR below Q1 or above Q3, are marked as outliers.
+-Boxplots are used to visualize the spread and identify potential outliers in numerical features.
+
+```python
+df_cleaned = pd.read_csv("cleaned_euphoria.csv")
+numerical_cols = df_cleaned.select_dtypes(include=['float64', 'int64']).columns.tolist()
+
+# Remove 'island_id' if present in numerical columns
+if 'island_id' in numerical_cols:
+    numerical_cols.remove('island_id')
+
+Q1 = df_cleaned[numerical_cols].quantile(0.25)
+Q3 = df_cleaned[numerical_cols].quantile(0.75)
+IQR = Q3 - Q1
+
+outliers = ((df_cleaned[numerical_cols] < (Q1 - 1.5 * IQR)) | 
+            (df_cleaned[numerical_cols] > (Q3 + 1.5 * IQR)))
+
+print(outliers)
+df_cleaned.to_csv("cleaned_euphoria.csv", index=False)
+```
+
+Summary:
+
+- Outliers were identified based on IQR. The "island_id" column, which is not predictive, was removed to improve model performance.
+- After outlier detection, most columns show no extreme outliers.
+
+**Pair Plot Visualization**
+
+-Pair plots are used to visualize the relationships between features, detect patterns, and identify outliers (if any remain). We focused on features with top positive and negative correlations with the happiness_index.
+df_cleaned = pd.read_csv("cleaned_euphoria.csv")
+numerical_cols = df_cleaned.select_dtypes(include=['float64', 'int64']).columns
+
+**Calculate correlation matrix**
+```python
+correlation_matrix = df_cleaned[numerical_cols].corr()
+target_col = 'happiness_index'
+
+top_positive = correlation_matrix[target_col].sort_values(ascending=False).index[1:4]
+top_negative = correlation_matrix[target_col].sort_values().index[:3]
+
+important_features = list(top_positive) + list(top_negative)
+important_features.append(target_col)
+
+sns.pairplot(df_cleaned[important_features], height=2.5, aspect=1, plot_kws={'alpha': 0.7})
+plt.subplots_adjust(hspace=0.3, wspace=0.3)
+plt.show()
+```
+**Analysis:**
+
+- Removing outliers clarified the relationships between features.
+`happiness_inde`x correlates positively with `island_size`, implying larger islands provide amenities contributing to happiness.
+- `total_refunds_requested` shows variability but little correlation with `happiness_index`.
+
