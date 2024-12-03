@@ -450,3 +450,39 @@ df_cleaned.to_csv("cleaned_euphoria.csv", index=False)
 **Outcome:**
 
 Dropped `referral_friends` and `total_refunds_requested` due to their lack of correlation with the target variable, improving the dataset for predictive modeling.
+
+**11. Distribution Plots**
+
+**Objective:**
+- Visualize the spread of numerical column values to understand their distribution patterns.
+
+```python
+df_cleaned = pd.read_csv("cleaned_euphoria.csv")
+numerical_cols = df_cleaned.select_dtypes(include=['float64', 'int64']).columns
+n_cols = 3
+n_rows = int(np.ceil(len(numerical_cols) / n_cols))
+fig, axes = plt.subplots(n_rows, n_cols, figsize=(12, 4 * n_rows))
+axes = axes.flatten()
+for i, col in enumerate(numerical_cols):
+    sns.histplot(df_cleaned[col], kde=True, bins=30, color='blue', ax=axes[i])
+    axes[i].set_title(f"Distribution of {col}")
+    axes[i].set_xlabel(col)
+    axes[i].set_ylabel("Frequency")
+for j in range(i + 1, len(axes)):
+    fig.delaxes(axes[j])
+plt.tight_layout()
+plt.show()
+```
+
+**Insights:**
+- *Skewness*: Features such as water_sources, shelters, and island_size show significant skewness, suggesting limited resources on most islands.
+- *Clustering*: region and x_coordinate distributions suggest geographical patterns.
+- *Target Association*: happiness_index distribution indicates a relationship with resource availability.
+  
+*Summary of Data Cleaning Process:*
+1)*Handled Missing Values:* Missing data was imputed effectively using KNN Imputer.
+20
+2) *Dropped Columns:* Removed irrelevant or redundant columns like island_id and others with low correlation to happiness_index.
+3) *Encoded Categorical Data:* Converted features like region into numerical format using LabelEncoder.
+4) *Analyzed Distributions:* Examined numerical feature spreads and identified skewness or clustering trends.
+5) *Prepared Data:* The dataset is now ready for modeling and further analysis.
