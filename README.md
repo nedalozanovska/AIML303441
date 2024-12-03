@@ -991,7 +991,7 @@ plt.show()
 **Final Recommendations:** 
 > - We need to improve metrics including focusing on reducing test set MSE (currently 206,967.15) and increasing R^2 (currently 0.7491).
 > - We need to add Add additional predictors, such as socioeconomic or environmental variables, to address the unexplained variance and improve model generalization.
-> - Advanced Models: Explore techniques like boosting (e.g., XGBoost or Gradient Boosting) to compare performance with Random Forest.
+> - We need to explore techniques like boosting (e.g., XGBoost or Gradient Boosting) to compare performance with Random Forest.
 
 ## Conclusion
 
