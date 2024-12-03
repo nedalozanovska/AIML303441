@@ -1,5 +1,10 @@
 **Artificial Intelligence and Machine Learning Project: Euphoria Dataset**
 
+*Team Members*
+Uendi Caka
+Neda Lozanovska
+Hedera Pema
+
 *Project Overview*
 
 This project explores a dataset, euphoria.csv, which contains features related to islands in a virtual world. Each island's characteristics include happiness levels, amenities, and geographical information. The project's objective is to leverage machine learning techniques to predict the happiness index of the islands, analyze model performance, and identify the best model for prediction.
