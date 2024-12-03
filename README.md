@@ -928,6 +928,8 @@ for i in range(len(metrics)):
 plt.tight_layout()
 plt.show()
 ```
+![image](https://github.com/user-attachments/assets/24787000-2cae-48d1-9477-1c6356e2b5d4)
+
 *Observations*
 - MSE (Mean Squared Error): Initially, the model performed well on training and validation data (low MSE).
 - R^2: Initial training and validation are high indicating a good fit to the data. The tuned models R^2 on the test set is lower , showing reduced predictive power.
