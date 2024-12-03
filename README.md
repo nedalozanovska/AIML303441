@@ -189,7 +189,6 @@ This highlights the range of values for each numerical feature.
 
 We analyze categorical columns (`region`, `happiness_metric`, `features`) to understand their distributions and identify imbalances.
 
----
 
 **Code:**
 ```python
@@ -243,8 +242,8 @@ Imbalances in categorical distributions, especially in region, need consideratio
 
 **Problem Description**
 The `happiness_metric` column shows extreme imbalance:
-- **"Monthly"** is overwhelmingly dominant with **89,564 instances**.
-- **"Weekly"** appears only **2 times**.
+- "Monthly" is overwhelmingly dominant with 89,564 instances.
+- "Weekly" appears only 2 times.
 
 This imbalance indicates:
 1. Potential data entry issues.
@@ -255,7 +254,7 @@ This imbalance indicates:
    - Created a histogram to check for skewness in the `happiness_metric` column.
 
 2. **Code:**
- ```python
+```python
    plt.figure(figsize=(8, 5))
    sns.histplot(data_cleaned['happiness_metric'], kde=True, color='blue', bins=30)
    plt.title("Distribution of Happiness Metric", fontsize=14)
